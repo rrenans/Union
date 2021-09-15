@@ -15,7 +15,7 @@ public class UnionApplication {
 	
 	@GetMapping
 	public String hello() {
-		return "Acesse a página http://localhost:8080/funcionarios";
+		return "Hello world!";
 	}
 
 }
