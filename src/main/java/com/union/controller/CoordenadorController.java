@@ -1,4 +1,4 @@
-package com.union.coordenador;
+package com.union.controller;
 
 // import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.union.coordenador.Coordenador;
+import com.union.service.CoordenadorService;
 
 @RestController
 @RequestMapping(path = "/")

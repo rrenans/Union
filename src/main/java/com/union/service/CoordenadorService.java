@@ -1,10 +1,13 @@
-package com.union.coordenador;
+package com.union.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.union.coordenador.Coordenador;
+import com.union.repository.CoordenadorRepository;
 
 @Service
 public class CoordenadorService {

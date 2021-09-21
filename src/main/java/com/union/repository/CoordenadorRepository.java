@@ -1,9 +1,11 @@
-package com.union.coordenador;
+package com.union.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.union.coordenador.Coordenador;
 
 @Repository // responsável por interagir com o db
 public interface CoordenadorRepository extends JpaRepository<Coordenador, Integer>{
