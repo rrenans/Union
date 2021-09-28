@@ -24,22 +24,23 @@ public class SwaggerConfig {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 		        .apis(RequestHandlerSelectors.basePackage("com.union"))
-		        .paths(PathSelectors.regex("/.*"))
+		        .paths(PathSelectors.regex("/.*")) 
 		        .build()
 		        .apiInfo(metaInfo());
 	}
 
 	private ApiInfo metaInfo() {
-		ApiInfo apiInfor = new ApiInfo(
-				 "Produtos API REST",
-	                "API REST de cadastro de produtos.",
+		@SuppressWarnings("rawtypes")
+		ApiInfo apiInfo = new ApiInfo(
+				 "Coordenador API REST",
+	                "API REST de cadastro de Coordenador.",
 	                "1.0",
 	                "Terms of Service",
 	                new Contact("Renan Silva", "https://github.com/rrenans", "renansantos.silva04@outlook.com"),
 	                "Apache License Version 2.0",
 	                "https://www.apache.org/licesen.html", new ArrayList<VendorExtension>()
 		);
-		return apiInfor;
+		return apiInfo;
 	}
 
 }
