@@ -13,4 +13,7 @@ public interface CoordenadorRepository extends JpaRepository<Coordenador, Intege
 	
 	// @Query("SELECT s FROM Student s WHERE s.email = ?1") copiei de um antigo código e não entendi
 	Optional<Coordenador>findCoordenadorByNome(String nome);
+	
+	
+	Coordenador findCoordenadorById(Integer id);
 }

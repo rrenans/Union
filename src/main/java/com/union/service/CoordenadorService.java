@@ -25,6 +25,11 @@ public class CoordenadorService {
 		return coordenadorRepository.findAll();
 	}
 	
+	// GET
+	public Coordenador pegarCoordenadorPorId(Integer id) {
+		return coordenadorRepository.findCoordenadorById(id);
+	}
+	
 	// POST
 	public void adicionarNovoCoordenador(Coordenador coordenador) {
 		Optional<Coordenador> coordenadorOptional = coordenadorRepository.findCoordenadorByNome(coordenador.getNome());
