@@ -1,5 +1,6 @@
 package com.union.service;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,15 @@ public class CoordenadorService {
 		}
 		
 		coordenadorRepository.save(coordenador);
+	}
+	
+	// DELETE
+	public void excluirCoordenador(Integer id) {
+		boolean existente = coordenadorRepository.existsById(id);
+		if (!existente) {
+			throw new IllegalStateException("Coordenador com id " + id + " não existe.");
+		}
+		coordenadorRepository.deleteById(id);
 	}
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,22 +35,29 @@ public class CoordenadorController {
 		this.coordenadorService = coordenadorService;
 	}
 	
-	@GetMapping
+	@GetMapping("/coordenador")
 	@ApiOperation(value="Retorna todos os Coordenadores")
 	public List<Coordenador> pegarCoordenadores() {
 		return coordenadorService.pegarCoordenadores();
 	}
 	
-	@GetMapping(path = {"/{id}"})
+	@GetMapping("/coordenador/{id}")
+	@ApiOperation(value="Retorna apenas um Coordenador de acordo com o seu Id")
 	public ResponseEntity<Coordenador> pegarCoordenadorPorId(@PathVariable Integer id) {
 		return new ResponseEntity<>(coordenadorService.pegarCoordenadorPorId(id), HttpStatus.OK);
 	}
 	
-	@PostMapping
+	@PostMapping("/coordenador")
 	@ResponseStatus(HttpStatus.CREATED)
 	@ApiOperation(value="Adiciona novo Coordenador")
 	public void registrarCoordenador(@RequestBody Coordenador coordenador) {
 		coordenadorService.adicionarNovoCoordenador(coordenador);
+	}
+	
+	@DeleteMapping("/coordenador/{id}")
+	@ApiOperation(value="Apaga apenas um Coordenador de acordo com o seu Id")
+	public void excluirCoordenador(@PathVariable("id") Integer id) {
+		coordenadorService.excluirCoordenador(id);
 	}
 	
 }
