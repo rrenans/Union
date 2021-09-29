@@ -15,7 +15,7 @@ public class CoordenadorService {
 	
 	private final CoordenadorRepository coordenadorRepository; // digamos que o repository é o db
 	
-	@Autowired // injetando uma instância do repositorio aqui ( injeção direta ? )
+	@Autowired
 	public CoordenadorService(CoordenadorRepository coordenadorRepository) {
 		super();
 		this.coordenadorRepository = coordenadorRepository;
@@ -51,4 +51,8 @@ public class CoordenadorService {
 		coordenadorRepository.deleteById(id);
 	}
 	
+	// UPDATE
+	public void editarCoordenador(Coordenador coordenador) {
+		coordenadorRepository.save(coordenador);
+	}
 }

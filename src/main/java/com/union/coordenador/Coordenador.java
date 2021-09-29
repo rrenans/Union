@@ -17,12 +17,11 @@ public class Coordenador {
 	
 	@Column // Nome é uma coluna
 	private String nome;
-	// private String email;
-	// private String cpf;
-	// private String cep;
-	// private Integer telefone;
+	private String email;
+	private String cpf;
+	private String cep;
+	private Integer telefone;
 	
-	// pq um construtor vazio é importante?
 	public Coordenador() {
 		super();
 	}
@@ -48,5 +47,39 @@ public class Coordenador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public Integer getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Integer telefone) {
+		this.telefone = telefone;
+	}
+	
+	
 	
 }
