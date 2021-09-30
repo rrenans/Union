@@ -25,13 +25,6 @@ public class FuncionarioController {
 	@Autowired
 	private FuncionarioService funcionarioService;
 	
-	/*
-	@Autowired
-	public FuncionarioController(FuncionarioService funcionarioService) {
-		super();
-		this.funcionarioService = funcionarioService;
-	}*/
-	
 	@GetMapping("/funcionario")
 	@ApiOperation(value="Retorna todos os Funcionarios")
 	public List<Funcionario> pegarFuncionarios() {
