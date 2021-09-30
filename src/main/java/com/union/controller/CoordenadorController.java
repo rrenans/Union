@@ -23,18 +23,19 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/c")
 @Api(value="API Rest Coordenador")
 @CrossOrigin(origins="*")
 public class CoordenadorController {
-	
-	private final CoordenadorService coordenadorService;
 
+	@Autowired
+	private CoordenadorService coordenadorService;
+	/*
 	@Autowired
 	public CoordenadorController(CoordenadorService coordenadorService) {
 		super();
 		this.coordenadorService = coordenadorService;
-	}
+	}*/
 	
 	@GetMapping("/coordenador")
 	@ApiOperation(value="Retorna todos os Coordenadores")
