@@ -1,11 +1,18 @@
 package com.union.coordenador;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+// import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.union.funcionario.Funcionario;
+
 
 @Entity // Entidade para o banco de dados
 @Table(name = "Coordenador") // Mostra que a minha classe coordenador é uma tabela no banco de dados
@@ -22,14 +29,22 @@ public class Coordenador {
 	private String cep;
 	private Integer telefone;
 	
+	@OneToMany(mappedBy = "coordenador")
+	// @JoinColumn(name = "coordenadorId", referencedColumnName = "id")
+	private List<Funcionario> funcionario;
+	
 	public Coordenador() {
 		super();
 	}
-	
-	public Coordenador(Integer id, String nome) {
+
+	public Coordenador(Integer id, String nome, String email, String cpf, String cep, Integer telefone) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.email = email;
+		this.cpf = cpf;
+		this.cep = cep;
+		this.telefone = telefone;
 	}
 
 	public Integer getId() {
