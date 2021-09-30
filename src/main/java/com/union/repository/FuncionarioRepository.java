@@ -9,9 +9,7 @@ import com.union.funcionario.Funcionario;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
-	/*
-	Optional<Funcionario>pegarFuncionarioPeloNome(String nome);
 	
-	Funcionario pegarFuncionarioPeloId(Integer id);
-	*/
+	// 
+	
 }
