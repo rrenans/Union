@@ -28,14 +28,13 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins="*")
 public class CoordenadorController {
 
-	@Autowired
-	private CoordenadorService coordenadorService;
-	/*
+	private final CoordenadorService coordenadorService;
+	
 	@Autowired
 	public CoordenadorController(CoordenadorService coordenadorService) {
 		super();
 		this.coordenadorService = coordenadorService;
-	}*/
+	}
 	
 	@GetMapping("/coordenador")
 	@ApiOperation(value="Retorna todos os Coordenadores")
