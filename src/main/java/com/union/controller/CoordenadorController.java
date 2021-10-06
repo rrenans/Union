@@ -23,7 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(path = "/c")
+@RequestMapping(path = "/coordenador")
 @Api(value="API Rest Coordenador")
 @CrossOrigin(origins="*")
 public class CoordenadorController {
@@ -36,32 +36,32 @@ public class CoordenadorController {
 		this.coordenadorService = coordenadorService;
 	}
 	
-	@GetMapping("/coordenador")
+	@GetMapping
 	@ApiOperation(value="Retorna todos os Coordenadores")
 	public List<Coordenador> pegarCoordenadores() {
 		return coordenadorService.pegarCoordenadores();
 	}
 	
-	@GetMapping("/coordenador/{id}")
+	@GetMapping("/{id}")
 	@ApiOperation(value="Retorna apenas um Coordenador de acordo com o seu Id")
 	public ResponseEntity<Coordenador> pegarCoordenadorPorId(@PathVariable Integer id) {
 		return new ResponseEntity<>(coordenadorService.pegarCoordenadorPorId(id), HttpStatus.OK);
 	}
 	
-	@PostMapping("/coordenador")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@ApiOperation(value="Adiciona novo Coordenador")
 	public void registrarCoordenador(@RequestBody Coordenador coordenador) {
 		coordenadorService.adicionarNovoCoordenador(coordenador);
 	}
 	
-	@DeleteMapping("/coordenador/{id}")
+	@DeleteMapping("/{id}")
 	@ApiOperation(value="Apaga apenas um Coordenador de acordo com o seu Id")
 	public void excluirCoordenador(@PathVariable("id") Integer id) {
 		coordenadorService.excluirCoordenador(id);
 	}
 	
-	@PutMapping("/coordenador/{id}")
+	@PutMapping("/{id}")
 	@ApiOperation(value="Edita apenas um Coordenador de acordo com o seu Id")
 	public void editarCoordenador(@RequestBody Coordenador coordenador) {
 		coordenadorService.editarCoordenador(coordenador);

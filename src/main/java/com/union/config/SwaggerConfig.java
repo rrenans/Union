@@ -32,8 +32,8 @@ public class SwaggerConfig {
 	private ApiInfo metaInfo() {
 		@SuppressWarnings("rawtypes")
 		ApiInfo apiInfo = new ApiInfo(
-				 "Coordenador API REST",
-	                "API REST de cadastro de Coordenador.",
+				 "Union API REST",
+	                "API REST da Union.",
 	                "1.0",
 	                "Terms of Service",
 	                new Contact("Renan Silva", "https://github.com/rrenans", "renansantos.silva04@outlook.com"),
