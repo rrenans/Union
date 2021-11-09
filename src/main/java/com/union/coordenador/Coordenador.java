@@ -2,11 +2,13 @@ package com.union.coordenador;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 // import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,8 +31,8 @@ public class Coordenador {
 	private String cep;
 	private Integer telefone;
 	
-	@OneToMany(mappedBy = "coordenador")
-	// @JoinColumn(name = "coordenadorId", referencedColumnName = "id")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")
 	private List<Funcionario> funcionario;
 	
 	public Coordenador() {
@@ -93,6 +95,14 @@ public class Coordenador {
 
 	public void setTelefone(Integer telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Funcionario> getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(List<Funcionario> funcionario) {
+		this.funcionario = funcionario;
 	}
 	
 	
