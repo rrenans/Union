@@ -1,4 +1,4 @@
-package com.union.funcionario;
+package com.union.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

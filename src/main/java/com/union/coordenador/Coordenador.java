@@ -11,13 +11,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 // import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.union.funcionario.Funcionario;
+import com.union.model.entity.Funcionario;
+import com.union.model.entity.Usuario;
+
+import lombok.*;
 
 
 @Entity // Entidade para o banco de dados
 @Table(name = "Coordenador") // Mostra que a minha classe coordenador é uma tabela no banco de dados
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Coordenador {
 
 	@Id // Primary key do banco de dados
@@ -31,13 +39,13 @@ public class Coordenador {
 	private String cep;
 	private Integer telefone;
 	
+	//@OneToOne
+	//@JoinColumn(name = "usuarioId", referencedColumnName = "id")
+	//private Usuario usuario;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")
-	private List<Funcionario> funcionario;
-	
-	public Coordenador() {
-		super();
-	}
+	private List<Funcionario> funcionario;	
 
 	public Coordenador(Integer id, String nome, String email, String cpf, String cep, Integer telefone) {
 		super();
@@ -103,8 +111,5 @@ public class Coordenador {
 
 	public void setFuncionario(List<Funcionario> funcionario) {
 		this.funcionario = funcionario;
-	}
-	
-	
-	
+	}	
 }
