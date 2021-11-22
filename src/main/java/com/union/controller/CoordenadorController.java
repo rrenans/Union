@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.union.coordenador.Coordenador;
-import com.union.service.CoordenadorService;
+import com.union.coordenador.CoordenadorOld;
+import com.union.service.CoordenadorServiceOld;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,30 +28,30 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins="*")
 public class CoordenadorController {
 
-	private final CoordenadorService coordenadorService;
+	/*private final CoordenadorServiceOld coordenadorService;
 	
 	@Autowired
-	public CoordenadorController(CoordenadorService coordenadorService) {
+	public CoordenadorController(CoordenadorServiceOld coordenadorService) {
 		super();
 		this.coordenadorService = coordenadorService;
 	}
 	
 	@GetMapping
 	@ApiOperation(value="Retorna todos os Coordenadores")
-	public List<Coordenador> pegarCoordenadores() {
+	public List<CoordenadorOld> pegarCoordenadores() {
 		return coordenadorService.pegarCoordenadores();
 	}
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value="Retorna apenas um Coordenador de acordo com o seu Id")
-	public ResponseEntity<Coordenador> pegarCoordenadorPorId(@PathVariable Integer id) {
+	public ResponseEntity<CoordenadorOld> pegarCoordenadorPorId(@PathVariable Integer id) {
 		return new ResponseEntity<>(coordenadorService.pegarCoordenadorPorId(id), HttpStatus.OK);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@ApiOperation(value="Adiciona novo Coordenador")
-	public void registrarCoordenador(@RequestBody Coordenador coordenador) {
+	public void registrarCoordenador(@RequestBody CoordenadorOld coordenador) {
 		coordenadorService.adicionarNovoCoordenador(coordenador);
 	}
 	
@@ -63,7 +63,7 @@ public class CoordenadorController {
 	
 	@PutMapping("/{id}")
 	@ApiOperation(value="Edita apenas um Coordenador de acordo com o seu Id")
-	public void editarCoordenador(@RequestBody Coordenador coordenador) {
-		coordenadorService.editarCoordenador(coordenador);
-	}
+	public void editarCoordenador(@RequestBody CoordenadorOld coordenador) {
+		coordenadorService.editarCoordenador(coordenador);*/
+	//}
 }

@@ -2,6 +2,7 @@ package com.union.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	@Transactional
 	public Funcionario salvar(Funcionario funcionario) {
+		validar(funcionario);
 		return funcionarioRepository.save(funcionario);
 	}
 
@@ -32,6 +34,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Transactional
 	public Funcionario atualizar(Funcionario funcionario) {
 		Objects.requireNonNull(funcionario.getId());
+		validar(funcionario);
 		return funcionarioRepository.save(funcionario);
 	}
 
@@ -66,5 +69,10 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		 * funcionario.getCoordenador().getId() == null ) { throw new
 		 * RegraNegocioException("Informe um Coordenador."); }
 		 */
+	}
+
+	@Override
+	public Optional<Funcionario> obterPorId(Integer id) {		
+		return funcionarioRepository.findById(id);
 	}
 }

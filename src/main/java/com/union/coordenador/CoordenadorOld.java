@@ -26,7 +26,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coordenador {
+public class CoordenadorOld {
 
 	@Id // Primary key do banco de dados
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // seria o Auto increment do nosso banco
@@ -47,7 +47,7 @@ public class Coordenador {
 	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")
 	private List<Funcionario> funcionario;	
 
-	public Coordenador(Integer id, String nome, String email, String cpf, String cep, Integer telefone) {
+	public CoordenadorOld(Integer id, String nome, String email, String cpf, String cep, Integer telefone) {
 		super();
 		this.id = id;
 		this.nome = nome;

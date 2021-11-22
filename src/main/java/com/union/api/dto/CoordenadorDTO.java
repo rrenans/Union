@@ -1,19 +1,16 @@
 package com.union.api.dto;
 
 import lombok.AllArgsConstructor;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDTO {
+public class CoordenadorDTO {
 
 	private String email;
 	private String nome;

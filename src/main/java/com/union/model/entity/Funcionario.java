@@ -5,43 +5,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
-public class Funcionario{
-	
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Funcionario {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String nome;
 	private String cpf;
 	private String cep;
 	private Integer telefone;
-	
+
 	// private Integer codigoPerfil;
 
-	// @ManyToOne
-	// @JoinColumn(name = "coordenadorId", referencedColumnName = "id")
-	// private Coordenador coordenador;
-	
-	public Funcionario() {
-		super();
-	}
-	
-	public Funcionario(Integer id, String nome, String cpf, String cep, Integer telefone) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.cep = cep;
-		this.telefone = telefone;
-		// this.codigoPerfil = codigoPerfil;
-	}
-
-
+	@ManyToOne
+	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")
+	private Coordenador coordenador;
 
 	public Integer getId() {
 		return id;
@@ -84,14 +79,10 @@ public class Funcionario{
 	}
 
 	/*
-	public Integer getCodigoPerfil() {
-		return codigoPerfil;
-	}
+	 * public Integer getCodigoPerfil() { return codigoPerfil; }
+	 * 
+	 * public void setCodigoPerfil(Integer codigoPerfil) { this.codigoPerfil =
+	 * codigoPerfil; }
+	 */
 
-	public void setCodigoPerfil(Integer codigoPerfil) {
-		this.codigoPerfil = codigoPerfil;
-	}
-	*/
-	
-	
 }

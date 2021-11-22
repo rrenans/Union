@@ -1,6 +1,7 @@
 package com.union.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.union.model.entity.Funcionario;
 
@@ -15,4 +16,6 @@ public interface FuncionarioService {
 	List<Funcionario> buscar(Funcionario funcionarioFiltro);
 	
 	void validar(Funcionario funcionario);
+	
+	Optional<Funcionario> obterPorId(Integer id);
 }

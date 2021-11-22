@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
-import com.union.api.dto.UsuarioDTO;
-import com.union.coordenador.Coordenador;
+import com.union.api.dto.CoordenadorDTO;
+import com.union.coordenador.CoordenadorOld;
 import com.union.exceptions.ErroAutenticacao;
 import com.union.exceptions.RegraNegocioException;
 import com.union.model.entity.Usuario;
-import com.union.service.CoordenadorService;
+import com.union.service.CoordenadorServiceOld;
 import com.union.service.UsuarioService;
 
 import io.swagger.annotations.ApiOperation;
@@ -25,16 +25,15 @@ import io.swagger.annotations.ApiOperation;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-	private UsuarioService service;	
+	private final UsuarioService service;	
 	
-	@Autowired
-	public UsuarioController(UsuarioService service) {
-		super();
-		this.service = service;
-	}
+	/*
+	 * @Autowired public UsuarioController(UsuarioService service) { super();
+	 * this.service = service; }
+	 */
 
 	@PostMapping("/autenticar")
-	public ResponseEntity<Object> autenticar(@RequestBody UsuarioDTO dto) {
+	public ResponseEntity<Object> autenticar(@RequestBody CoordenadorDTO dto) {
 		try {
 			Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());
 			return ResponseEntity.ok(usuarioAutenticado);
@@ -44,7 +43,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-    public ResponseEntity<Object> salvar(@RequestBody UsuarioDTO dto) {
+    public ResponseEntity<Object> salvar(@RequestBody CoordenadorDTO dto) {
 
         Usuario usuario = Usuario.builder()
                 .nome(dto.getNome())
