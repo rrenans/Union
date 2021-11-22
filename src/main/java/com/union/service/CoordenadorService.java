@@ -33,6 +33,7 @@ public class CoordenadorService {
 	
 	// POST
 	public void adicionarNovoCoordenador(Coordenador coordenador) {
+		// podemos comentar toda a regra aqui
 		Optional<Coordenador> coordenadorOptional = coordenadorRepository.findCoordenadorByNome(coordenador.getNome());
 		
 		if (coordenadorOptional.isPresent()) {
