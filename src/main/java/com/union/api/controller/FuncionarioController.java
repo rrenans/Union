@@ -31,33 +31,27 @@ import lombok.RequiredArgsConstructor;
 public class FuncionarioController {
 
 	private final FuncionarioService funcionarioService;
-	private final CoordenadorService coordenadorService;
-
-	/*
-	 * @Autowired public FuncionarioController(FuncionarioService
-	 * funcionarioService, CoordenadorService coordenadorService) {
-	 * this.funcionarioService = funcionarioService; this.coordenadorService =
-	 * coordenadorService; }
-	 */
+	private final CoordenadorService coordenadorService;	
 
 	@GetMapping
 	public ResponseEntity buscar(@RequestParam(value = "nome", required = false) String nome,
 			@RequestParam(value = "cpf", required = false) String cpf,
 			@RequestParam(value = "telefone", required = false) Integer telefone,
-			@RequestParam("coordenador") Integer idcoordenador) {
+			@RequestParam(value = "coordenador", required = false) Integer idcoordenador) {
 		Funcionario funcionarioFiltro = new Funcionario();
 		funcionarioFiltro.setNome(nome);
 		funcionarioFiltro.setCpf(cpf);
 		funcionarioFiltro.setTelefone(telefone);
 
-		Optional<Coordenador> coordenador = coordenadorService.obterPorId(idcoordenador);
-		if (coordenador.isPresent()) {
-			return ResponseEntity.badRequest()
-					.body("Não foi possível realizar a consulta. Coordanador não encontrado.");
-		} else {
-			funcionarioFiltro.setCoordenador(coordenador.get());
-		}
-
+		if (idcoordenador != null) {
+			Optional<Coordenador> coordenador = coordenadorService.obterPorId(idcoordenador);
+			if (!coordenador.isPresent()) {
+				return ResponseEntity.badRequest()
+						.body("Não foi possível realizar a consulta. Coordenador não encontrado.");
+			} else {
+				funcionarioFiltro.setCoordenador(coordenador.get());
+			}
+		}		
 		List<Funcionario> funcionarios = funcionarioService.buscar(funcionarioFiltro);
 		return ResponseEntity.ok(funcionarios);
 	}
@@ -91,6 +85,7 @@ public class FuncionarioController {
 	public ResponseEntity deletar(@PathVariable("id") Integer id) {
 		return funcionarioService.obterPorId(id).map(entidade -> {
 			funcionarioService.deletar(entidade);
+
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet(() -> new ResponseEntity("Funcionário não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
 	}

@@ -1,6 +1,5 @@
 package com.union.model.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +24,7 @@ public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column
+	
 	private String nome;
 	private String cpf;
 	private String cep;
@@ -77,12 +75,4 @@ public class Funcionario {
 	public void setTelefone(Integer telefone) {
 		this.telefone = telefone;
 	}
-
-	/*
-	 * public Integer getCodigoPerfil() { return codigoPerfil; }
-	 * 
-	 * public void setCodigoPerfil(Integer codigoPerfil) { this.codigoPerfil =
-	 * codigoPerfil; }
-	 */
-
 }

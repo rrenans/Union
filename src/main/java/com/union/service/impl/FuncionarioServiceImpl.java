@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,9 @@ import com.union.service.FuncionarioService;
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
 
+	@Autowired
 	private FuncionarioRepository funcionarioRepository;
-
+	
 	public FuncionarioServiceImpl(FuncionarioRepository funcionarioRepository) {
 		this.funcionarioRepository = funcionarioRepository;
 	}
@@ -39,9 +41,10 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public void deletar(Funcionario funcionario) {
 		Objects.requireNonNull(funcionario.getId());
+		
 		funcionarioRepository.delete(funcionario);
 	}
 
