@@ -15,7 +15,7 @@ import com.union.model.entity.Coordenador;
 import com.union.service.CoordenadorService;
 
 @RestController
-@RequestMapping("/api/coordenadores")
+@RequestMapping("/api/coordenador")
 @RequiredArgsConstructor
 public class CoordenadorController {
 
@@ -25,6 +25,7 @@ public class CoordenadorController {
 	public ResponseEntity<Object> autenticar(@RequestBody CoordenadorDTO dto) {
 		try {
 			Coordenador coordenadorAutenticado = coordenadorService.autenticar(dto.getEmail(), dto.getSenha());
+			
 			return ResponseEntity.ok(coordenadorAutenticado);
 		} catch (ErroAutenticacao e) {
 			return ResponseEntity.badRequest().body(e.getMessage());

@@ -65,13 +65,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		if (funcionario.getCpf() == null || funcionario.getCpf().length() != 11) {
 			throw new RegraNegocioException("CPF inválido.");
-		}
-
-		/*
-		 * if(funcionario.getCoordenador() == null ||
-		 * funcionario.getCoordenador().getId() == null ) { throw new
-		 * RegraNegocioException("Informe um Coordenador."); }
-		 */
+		}		
 	}
 
 	@Override

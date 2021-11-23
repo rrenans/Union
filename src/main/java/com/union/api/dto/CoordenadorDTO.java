@@ -2,10 +2,7 @@ package com.union.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Builder
 @AllArgsConstructor
@@ -15,6 +12,7 @@ public class CoordenadorDTO {
 	private String email;
 	private String nome;
 	private String senha;
+	
 	public String getEmail() {
 		return email;
 	}

@@ -25,7 +25,7 @@ public class CoordenadorServiceImpl implements CoordenadorService {
 	public Coordenador autenticar(String email, String senha) {
 		Optional<Coordenador> coordenador = coordenadorRepository.findByEmail(email);
 
-		if (!coordenador.isPresent() && !coordenador.get().getSenha().equals(senha)) {
+		if ((!coordenador.isPresent()) || (!coordenador.get().getSenha().equals(senha))) {
 			throw new ErroAutenticacao("Coordenador ou senha inválidos.");
 		}
 
