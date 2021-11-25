@@ -1,5 +1,6 @@
 package com.union.api.controller;
 
+import org.apache.catalina.webresources.JarWarResourceSet;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 import com.union.api.dto.CoordenadorDTO;
+import com.union.api.dto.TokenDTO;
 import com.union.exceptions.ErroAutenticacao;
 import com.union.exceptions.RegraNegocioException;
 import com.union.model.entity.Coordenador;
 import com.union.service.CoordenadorService;
+import com.union.service.JwtService;
 
 @RestController
 @RequestMapping("/api/coordenador")
@@ -20,13 +23,17 @@ import com.union.service.CoordenadorService;
 public class CoordenadorController {
 
 	private final CoordenadorService coordenadorService;
+	private final JwtService jwtService;
 
 	@PostMapping("/autenticar")
-	public ResponseEntity<Object> autenticar(@RequestBody CoordenadorDTO dto) {
+	public ResponseEntity<?> autenticar(@RequestBody CoordenadorDTO dto) {
 		try {
 			Coordenador coordenadorAutenticado = coordenadorService.autenticar(dto.getEmail(), dto.getSenha());
 			
-			return ResponseEntity.ok(coordenadorAutenticado);
+			String token = jwtService.gerarToken(coordenadorAutenticado);			
+			TokenDTO tokenDTO = new TokenDTO(coordenadorAutenticado.getNome(), token);
+			
+			return ResponseEntity.ok(tokenDTO);
 		} catch (ErroAutenticacao e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
