@@ -2,6 +2,7 @@ package com.union.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,17 +16,21 @@ import com.union.service.CoordenadorService;
 public class CoordenadorServiceImpl implements CoordenadorService {
 
 	private CoordenadorRepository coordenadorRepository;
+	private PasswordEncoder encoder;
 
-	public CoordenadorServiceImpl(CoordenadorRepository coordenadorRepository) {
+	public CoordenadorServiceImpl(CoordenadorRepository coordenadorRepository, PasswordEncoder encoder) {
 		super();
 		this.coordenadorRepository = coordenadorRepository;
+		this.encoder = encoder;
 	}
 
 	@Override
 	public Coordenador autenticar(String email, String senha) {
 		Optional<Coordenador> coordenador = coordenadorRepository.findByEmail(email);
+		
+		boolean senhasIguais = encoder.matches(senha, coordenador.get().getSenha());
 
-		if ((!coordenador.isPresent()) || (!coordenador.get().getSenha().equals(senha))) {
+		if ((!coordenador.isPresent()) || (!senhasIguais)) {
 			throw new ErroAutenticacao("Coordenador ou senha inválidos.");
 		}
 
@@ -36,7 +41,14 @@ public class CoordenadorServiceImpl implements CoordenadorService {
 	@Transactional
 	public Coordenador salvarCoordenador(Coordenador coordenador) {
 		validarEmail(coordenador.getEmail());
+		criptografarSenha(coordenador);
 		return coordenadorRepository.save(coordenador);
+	}
+
+	private void criptografarSenha(Coordenador coordenador) {
+		String senha = coordenador.getSenha();
+		String senhaCripto = encoder.encode(senha);
+		coordenador.setSenha(senhaCripto);
 	}
 
 	@Override
