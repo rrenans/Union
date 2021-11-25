@@ -46,21 +46,34 @@ public class JwtServiceImpl implements JwtService {
 	}
 
 	@Override
-	public Claims obterToken(String token) throws ExpiredJwtException {
-		// TODO Auto-generated method stub
-		return null;
+	public Claims obterClaims(String token) throws ExpiredJwtException {
+		
+		return Jwts.parser()
+				.setSigningKey(chaveAssinatura)
+				.parseClaimsJws(token)
+				.getBody();
 	}
 
 	@Override
 	public boolean isTokenValido(String token) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Claims claims = obterClaims(token);
+			Date dataEx = claims.getExpiration();
+			LocalDateTime dataExpiracao = dataEx.toInstant()
+					.atZone(ZoneId.systemDefault()).toLocalDateTime();
+			
+			boolean dataHoraAtualIsAfterDataExpiracao = LocalDateTime.now().isAfter(dataExpiracao);
+			return !dataHoraAtualIsAfterDataExpiracao;
+		}catch(ExpiredJwtException e) {
+			
+			return false;
+		}
 	}
 
 	@Override
 	public String obterLoginCoordenador(String token) {
-		// TODO Auto-generated method stub
-		return null;
+		Claims claims = obterClaims(token);
+		
+		return claims.getSubject();
 	}
-
 }

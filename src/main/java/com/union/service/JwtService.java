@@ -9,7 +9,7 @@ public interface JwtService {
 
 	String gerarToken(Coordenador coordenador);
 	
-	Claims obterToken(String token) throws ExpiredJwtException;
+	Claims obterClaims(String token) throws ExpiredJwtException;
 	
 	boolean isTokenValido(String token);
 	
