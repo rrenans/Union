@@ -26,11 +26,15 @@ public class CoordenadorServiceImpl implements CoordenadorService {
 
 	@Override
 	public Coordenador autenticar(String email, String senha) {
-		Optional<Coordenador> coordenador = coordenadorRepository.findByEmail(email);
+		Optional<Coordenador> coordenador = coordenadorRepository.findByEmail(email);		
+
+		if (!coordenador.isPresent()) {
+			throw new ErroAutenticacao("Coordenador ou senha inválidos.");
+		}
 		
 		boolean senhasIguais = encoder.matches(senha, coordenador.get().getSenha());
-
-		if ((!coordenador.isPresent()) || (!senhasIguais)) {
+		
+		if (!senhasIguais) {
 			throw new ErroAutenticacao("Coordenador ou senha inválidos.");
 		}
 

@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class FuncionarioController {
 
 	private final FuncionarioService funcionarioService;
-	private final CoordenadorService coordenadorService;	
+	private final CoordenadorService coordenadorService;
 
 	@GetMapping
 	public ResponseEntity buscar(@RequestParam(value = "nome", required = false) String nome,
@@ -50,7 +50,7 @@ public class FuncionarioController {
 			} else {
 				funcionarioFiltro.setCoordenador(coordenador.get());
 			}
-		}		
+		}
 		List<Funcionario> funcionarios = funcionarioService.buscar(funcionarioFiltro);
 		return ResponseEntity.ok(funcionarios);
 	}
@@ -78,6 +78,17 @@ public class FuncionarioController {
 				return ResponseEntity.badRequest().body(e.getMessage());
 			}
 		}).orElseGet(() -> new ResponseEntity("Funcionário não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
+	}
+
+	@GetMapping("{id}")
+	public ResponseEntity detalhes(@PathVariable("id") Integer id) {
+		Optional<Funcionario> funcionario = funcionarioService.obterPorId(id);
+
+		if (funcionario.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+
+		return ResponseEntity.ok(funcionario);
 	}
 
 	@DeleteMapping("{id}")
