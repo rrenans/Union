@@ -8,7 +8,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -67,12 +66,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		config.setAllowedMethods(all);
 		config.setAllowedOrigins(all);
 		config.setAllowedHeaders(all);
+		config.setAllowedOriginPatterns(all);
 		config.setAllowCredentials(true);
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
 
 		CorsFilter corsfilter = new CorsFilter(source);
+		
 		FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<CorsFilter>(corsfilter);
 
 		filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
