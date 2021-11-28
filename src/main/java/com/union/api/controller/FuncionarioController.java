@@ -99,6 +99,17 @@ public class FuncionarioController {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet(() -> new ResponseEntity("Funcionário não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
 	}
+	
+	private FuncionarioDTO converter(Funcionario funcionario) {
+		return FuncionarioDTO.builder()
+					.id(funcionario.getId())
+					.nome(funcionario.getNome())
+					.cpf(funcionario.getCpf())
+					.cep(funcionario.getCep())
+					.telefone(funcionario.getTelefone())					
+					.coordenador(funcionario.getCoordenador().getId())
+					.build();					
+	}
 
 	private Funcionario converter(FuncionarioDTO dto) {
 		Funcionario funcionario = new Funcionario();
@@ -111,8 +122,8 @@ public class FuncionarioController {
 		Coordenador cordenador = coordenadorService.obterPorId(dto.getCoordenador())
 				.orElseThrow(() -> new RegraNegocioException("Coordenador não encontrado para o Id informado."));
 
-		funcionario.setCoordenador(cordenador);
-
+		funcionario.setCoordenador(cordenador);	
+		
 		return funcionario;
-	}
+	}	
 }
