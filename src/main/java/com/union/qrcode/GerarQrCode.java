@@ -13,10 +13,10 @@ public class GerarQrCode {
 	public static byte[] gerarQrCode() throws Exception {
         
 		// URL para a qual o qr code será direcionado
-        String content = "https://union-senai-app.herokuapp.com/#/detalhes/15";
+        String content = "https://union-senai-app.herokuapp.com/#/detalhes/3";
         
         // URL para onde o qr code é gerado -> mudar depois
-        String pathToStore = "C:\\Tools\\QRCodeGenerated.jpg";
+        String pathToStore = "QRCodeGenerated.jpg";
         
         // definir o formato, altura e largura do qr code, o tipo da imagem
         BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, 500, 500);
