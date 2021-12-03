@@ -13,7 +13,7 @@ public class GerarQrCode {
 	public static byte[] gerarQrCode() throws Exception {
         
 		// URL para a qual o qr code será direcionado
-        String content = "http://192.168.0.8:8080/swagger-ui.html";
+        String content = "http://localhost:8080/api/funcionarios";
         
         // URL para onde o qr code é gerado -> mudar depois
         String pathToStore = "C:\\Tools\\QRCodeGenerated.jpg";

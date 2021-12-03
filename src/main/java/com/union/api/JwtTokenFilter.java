@@ -33,6 +33,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 		String authorization = request.getHeader("Authorization");
 
+		if(request.getRequestURI().contains("api/funcionarios")) {
+			filterChain.doFilter(request, response);
+			return ;
+		}
+		
 		if (authorization != null && authorization.startsWith("Bearer")) {
 			String token = authorization.split(" ")[1];
 			boolean isTokenValid = jwtService.isTokenValido(token);

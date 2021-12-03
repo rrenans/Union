@@ -52,11 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/api/coordenador/autenticar")
-				.permitAll().antMatchers(HttpMethod.POST, "/api/coordenador").permitAll().anyRequest().authenticated()
+				.permitAll().antMatchers(HttpMethod.POST, "/api/coordenador").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/funcionarios").permitAll().anyRequest().authenticated()
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-
+	
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
 
