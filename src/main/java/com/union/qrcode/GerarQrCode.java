@@ -13,7 +13,7 @@ public class GerarQrCode {
 	public static byte[] gerarQrCode() throws Exception {
         
 		// URL para a qual o qr code será direcionado
-        String content = "http://localhost:3000/#/detalhes/15";
+        String content = "https://union-senai-app.herokuapp.com/#/detalhes/15";
         
         // URL para onde o qr code é gerado -> mudar depois
         String pathToStore = "C:\\Tools\\QRCodeGenerated.jpg";
