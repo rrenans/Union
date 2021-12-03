@@ -28,9 +28,7 @@ public class Funcionario {
 	private String nome;
 	private String cpf;
 	private String cep;
-	private Integer telefone;
-
-	// private Integer codigoPerfil;
+	private Integer telefone;	
 
 	@ManyToOne
 	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")

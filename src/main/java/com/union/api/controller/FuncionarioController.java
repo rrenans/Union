@@ -55,6 +55,13 @@ public class FuncionarioController {
 		return ResponseEntity.ok(funcionarios);
 	}
 
+	@GetMapping("{id}")
+	public ResponseEntity obterFuncionario(@PathVariable("id") Integer id) {
+		return funcionarioService.obterPorId(id)
+				.map( funcionario -> new ResponseEntity(converter(funcionario), HttpStatus.OK))
+				.orElseGet( () -> new ResponseEntity(HttpStatus.NOT_FOUND));
+	}
+
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody FuncionarioDTO dto) {
 		try {
@@ -80,7 +87,7 @@ public class FuncionarioController {
 		}).orElseGet(() -> new ResponseEntity("Funcionário não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/detalhes/{id}")
 	public ResponseEntity detalhes(@PathVariable("id") Integer id) {
 		Optional<Funcionario> funcionario = funcionarioService.obterPorId(id);
 
@@ -98,6 +105,12 @@ public class FuncionarioController {
 
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet(() -> new ResponseEntity("Funcionário não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
+	}
+
+	private FuncionarioDTO converter(Funcionario funcionario) {
+		return FuncionarioDTO.builder().id(funcionario.getId()).nome(funcionario.getNome()).cpf(funcionario.getCpf())
+				.cep(funcionario.getCep()).telefone(funcionario.getTelefone())
+				.coordenador(funcionario.getCoordenador().getId()).build();
 	}
 
 	private Funcionario converter(FuncionarioDTO dto) {

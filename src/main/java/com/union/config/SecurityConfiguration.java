@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -25,7 +26,7 @@ import com.union.service.JwtService;
 import com.union.service.impl.SecurityUserDetailsService;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SecurityUserDetailsService userDetailsService;
@@ -51,11 +52,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/api/coordenador/autenticar")
-				.permitAll().antMatchers(HttpMethod.POST, "/api/coordenador").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/funcionarios").permitAll().anyRequest().authenticated()
-				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.csrf().disable()
+		.authorizeRequests()
+		.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/funcionarios/detalhes/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/coordenador/autenticar").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/coordenador").permitAll().anyRequest().authenticated()
+		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and()
+		.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+				
 	}
 	
 	@Bean
@@ -65,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowedMethods(all);
-		config.setAllowedOrigins(all);
+		//config.setAllowedOrigins(all);
 		config.setAllowedHeaders(all);
 		config.setAllowedOriginPatterns(all);
 		config.setAllowCredentials(true);
