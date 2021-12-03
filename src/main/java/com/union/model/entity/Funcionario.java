@@ -1,5 +1,6 @@
 package com.union.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,50 +28,11 @@ public class Funcionario {
 	
 	private String nome;
 	private String cpf;
-	private String cep;
-	private Integer telefone;	
+	@Column(length = 2000)
+	private String foto;		
 
 	@ManyToOne
 	@JoinColumn(name = "coordenadorId", referencedColumnName = "id")
-	private Coordenador coordenador;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public Integer getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Integer telefone) {
-		this.telefone = telefone;
-	}
+	private Coordenador coordenador;	
+	
 }
