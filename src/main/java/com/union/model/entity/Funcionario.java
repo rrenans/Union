@@ -25,7 +25,6 @@ public class Funcionario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(unique = true) // passar para o cpf
 	private String nome;
 	private String cpf;
 	private String cep;

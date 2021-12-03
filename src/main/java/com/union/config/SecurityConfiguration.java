@@ -65,7 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 				
 	}
-
+	
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
 

@@ -1,4 +1,4 @@
-package com.union.controller;
+package com.union.api.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ public class QrcodeController {
 		try {
 			return GerarQrCode.gerarQrCode();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
