@@ -34,13 +34,12 @@ public class FuncionarioController {
 
 	@GetMapping
 	public ResponseEntity buscar(@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "cpf", required = false) String cpf,
-			@RequestParam(value = "telefone", required = false) Integer telefone,
+			@RequestParam(value = "cpf", required = false) String cpf,			
 			@RequestParam(value = "coordenador", required = false) Integer idcoordenador) {
 		Funcionario funcionarioFiltro = new Funcionario();
 		funcionarioFiltro.setNome(nome);
 		funcionarioFiltro.setCpf(cpf);
-		funcionarioFiltro.setTelefone(telefone);
+		
 
 		if (idcoordenador != null) {
 			Optional<Coordenador> coordenador = coordenadorService.obterPorId(idcoordenador);
@@ -109,7 +108,7 @@ public class FuncionarioController {
 
 	private FuncionarioDTO converter(Funcionario funcionario) {
 		return FuncionarioDTO.builder().id(funcionario.getId()).nome(funcionario.getNome()).cpf(funcionario.getCpf())
-				.cep(funcionario.getCep()).telefone(funcionario.getTelefone())
+				.foto(funcionario.getFoto())
 				.coordenador(funcionario.getCoordenador().getId()).build();
 	}
 
@@ -118,8 +117,7 @@ public class FuncionarioController {
 		funcionario.setId(dto.getId());
 		funcionario.setNome(dto.getNome());
 		funcionario.setCpf(dto.getCpf());
-		funcionario.setCep(dto.getCep());
-		funcionario.setTelefone(dto.getTelefone());
+		funcionario.setFoto(dto.getFoto());		
 
 		Coordenador cordenador = coordenadorService.obterPorId(dto.getCoordenador())
 				.orElseThrow(() -> new RegraNegocioException("Coordenador não encontrado para o Id informado."));
